@@ -5,5 +5,5 @@ import sabatinoprovenza.BE_S5_L5.entities.Utente;
 
 
 public interface UtenteRepository extends JpaRepository<Utente, Long> {
-
+    
 }
