@@ -6,10 +6,14 @@ import sabatinoprovenza.BE_S5_L5.entities.Prenotazione;
 import sabatinoprovenza.BE_S5_L5.entities.Utente;
 
 import java.time.LocalDate;
+import java.util.List;
 
 
 public interface PrenotazioneRepository extends JpaRepository<Prenotazione, Long> {
     boolean existsByPostazioneAndData(Postazione postazione, LocalDate data);
 
     boolean existsByUtenteAndData(Utente utente, LocalDate data);
+
+    List<Prenotazione> findByUtente(Utente utente);
+
 }

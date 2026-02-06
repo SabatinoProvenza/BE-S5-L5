@@ -49,4 +49,14 @@ public class PostazioneService {
 
         return lista;
     }
+
+    public List<Postazione> findByMaxOccupantiGreaterThanEqual(int numero) {
+        List<Postazione> lista = postazioneRepository.findByMaxOccupantiGreaterThanEqual(numero);
+
+        if (lista.isEmpty()) {
+            System.out.println("Nessuna postazione trovata con posti disponibili maggiori di: " + numero);
+        }
+
+        return lista;
+    }
 }

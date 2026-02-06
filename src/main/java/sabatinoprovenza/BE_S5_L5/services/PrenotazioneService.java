@@ -50,5 +50,13 @@ public class PrenotazioneService {
         return prenotazioni;
     }
 
+    public List<Prenotazione> findByUtente(long utenteId) {
+        Utente u = utenteService.findById(utenteId);
+        List<Prenotazione> prenotazioni = prenotazioneRepository.findByUtente(u);
+        if (prenotazioni.isEmpty())
+            System.out.println("Non ci sono prenotazioni registrate");
+        return prenotazioni;
+    }
+
 
 }

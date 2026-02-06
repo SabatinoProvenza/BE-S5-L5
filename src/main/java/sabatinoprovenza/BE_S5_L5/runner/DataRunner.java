@@ -88,6 +88,7 @@ public class DataRunner implements CommandLineRunner {
 
         List<Postazione> postazioniOpenSpace = postazioneService.findByTipo(TipoPostazione.OPENSPACE);
 
+        //RICERCA POSTAZIONE PER TIPO
         System.out.println("POSTAZIONI OPENSPACE:");
         postazioniOpenSpace.forEach(p -> System.out.println(p.getEdificio() + " - " + p.getDescrizione()));
 
@@ -113,6 +114,12 @@ public class DataRunner implements CommandLineRunner {
         postazioneService.findByTipoAndCitta(TipoPostazione.OPENSPACE, "Salerno")
                 .forEach(p -> System.out.println(p.getEdificio().getNome() + " - " + p.getDescrizione()));
 
+        //RICERCA PER MAX OCCUPANTI
+        postazioneService.findByMaxOccupantiGreaterThanEqual(5).forEach(postazione -> System.out.println(postazione));
+
+        //PRENOTAZIONI PER UTENTE
+        prenotazioneService.findByUtente(1L)
+                .forEach(p -> System.out.println(p.getUtente() + " - " + p.getData() + " - " + p.getPostazione()));
 
     }
 }
