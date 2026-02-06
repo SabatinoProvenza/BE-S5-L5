@@ -3,9 +3,11 @@ package sabatinoprovenza.BE_S5_L5.services;
 import org.springframework.stereotype.Service;
 import sabatinoprovenza.BE_S5_L5.entities.Postazione;
 import sabatinoprovenza.BE_S5_L5.entities.TipoPostazione;
+import sabatinoprovenza.BE_S5_L5.exceptions.NotFoundException;
 import sabatinoprovenza.BE_S5_L5.repositories.PostazioneRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PostazioneService {
@@ -19,6 +21,13 @@ public class PostazioneService {
         postazioneRepository.save(p);
         System.out.println("La postazione " + p.getDescrizione() + " " + " è stata salvata!");
     }
+
+    public Postazione findById(Long id) {
+        Optional<Postazione> found = postazioneRepository.findById(id);
+        if (found.isPresent()) return found.get();
+        else throw new NotFoundException("La postazione con id: " + id + " non è stata trovata");
+    }
+
 
     public List<Postazione> findByTipo(TipoPostazione tipo) {
         List<Postazione> lista = postazioneRepository.findByTipo(tipo);

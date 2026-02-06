@@ -89,5 +89,15 @@ public class DataRunner implements CommandLineRunner {
         System.out.println("POSTAZIONI OPENSPACE:");
         postazioniOpenSpace.forEach(p -> System.out.println(p.getEdificio() + " - " + p.getDescrizione()));
 
+
+        //TENTATIVO DI PRENOTAZIONE CHE IN CUI UN UTENTE HA GIA PRENOTATO
+//        try {
+//            prenotazioneService.prenota(2L, 2L, LocalDate.now().plusDays(1));
+//        } catch (PrenotazioneException e) {
+//            System.out.println(e.getMessage());
+//        }
+
+        prenotazioneService.findAll().forEach(prenotazione -> System.out.println(prenotazione));
+
     }
 }
