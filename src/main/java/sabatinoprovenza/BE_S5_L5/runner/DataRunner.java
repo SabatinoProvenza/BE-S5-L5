@@ -11,6 +11,8 @@ import sabatinoprovenza.BE_S5_L5.services.PostazioneService;
 import sabatinoprovenza.BE_S5_L5.services.PrenotazioneService;
 import sabatinoprovenza.BE_S5_L5.services.UtenteService;
 
+import java.util.List;
+
 @Component
 public class DataRunner implements CommandLineRunner {
     private final UtenteService utenteService;
@@ -81,6 +83,11 @@ public class DataRunner implements CommandLineRunner {
         p3.setMaxOccupanti(8);
         p3.setEdificio(e2);
         //postazioneService.save(p3);
+
+        List<Postazione> postazioniOpenSpace = postazioneService.findByTipo(TipoPostazione.OPENSPACE);
+
+        System.out.println("POSTAZIONI OPENSPACE:");
+        postazioniOpenSpace.forEach(p -> System.out.println(p.getEdificio() + " - " + p.getDescrizione()));
 
     }
 }

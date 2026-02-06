@@ -31,4 +31,11 @@ public class Edificio {
         this.citta = citta;
         this.postazioni = postazioni;
     }
+
+    @Override
+    public String toString() {
+        return "Edificio{" +
+                "nome='" + nome + '\'' +
+                '}';
+    }
 }
