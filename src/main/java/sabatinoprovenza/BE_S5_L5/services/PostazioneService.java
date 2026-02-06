@@ -38,4 +38,15 @@ public class PostazioneService {
 
         return lista;
     }
+
+    public List<Postazione> findByTipoAndCitta(TipoPostazione tipo, String citta) {
+
+        List<Postazione> lista = postazioneRepository.findByTipoAndEdificio_Citta(tipo, citta);
+
+        if (lista.isEmpty()) {
+            System.out.println("Nessuna postazione trovata per il tipo: " + tipo + " nella città: " + citta);
+        }
+
+        return lista;
+    }
 }

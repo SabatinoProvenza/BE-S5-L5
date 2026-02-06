@@ -6,11 +6,13 @@ import sabatinoprovenza.BE_S5_L5.entities.Edificio;
 import sabatinoprovenza.BE_S5_L5.entities.Postazione;
 import sabatinoprovenza.BE_S5_L5.entities.TipoPostazione;
 import sabatinoprovenza.BE_S5_L5.entities.Utente;
+import sabatinoprovenza.BE_S5_L5.exceptions.PrenotazioneException;
 import sabatinoprovenza.BE_S5_L5.services.EdificioService;
 import sabatinoprovenza.BE_S5_L5.services.PostazioneService;
 import sabatinoprovenza.BE_S5_L5.services.PrenotazioneService;
 import sabatinoprovenza.BE_S5_L5.services.UtenteService;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Component
@@ -91,13 +93,26 @@ public class DataRunner implements CommandLineRunner {
 
 
         //TENTATIVO DI PRENOTAZIONE CHE IN CUI UN UTENTE HA GIA PRENOTATO
-//        try {
-//            prenotazioneService.prenota(2L, 2L, LocalDate.now().plusDays(1));
-//        } catch (PrenotazioneException e) {
-//            System.out.println(e.getMessage());
-//        }
+        try {
+            prenotazioneService.prenota(2L, 2L, LocalDate.now().plusDays(1));
+        } catch (PrenotazioneException e) {
+            System.out.println(e.getMessage());
+        }
 
+        //TENTATIVO DI PRENOTAZIONE POSTAZIONE GIA PRENOTATA
+        try {
+            prenotazioneService.prenota(3L, 2L, LocalDate.now().plusDays(1));
+        } catch (PrenotazioneException e) {
+            System.out.println(e.getMessage());
+        }
+
+        //LISTA PRENOTAZIONI
         prenotazioneService.findAll().forEach(prenotazione -> System.out.println(prenotazione));
+
+        //RICERCA POSTAZIONE PER TIPO E CITTA
+        postazioneService.findByTipoAndCitta(TipoPostazione.OPENSPACE, "Salerno")
+                .forEach(p -> System.out.println(p.getEdificio().getNome() + " - " + p.getDescrizione()));
+
 
     }
 }

@@ -9,5 +9,7 @@ import java.util.List;
 
 public interface PostazioneRepository extends JpaRepository<Postazione, Long> {
     List<Postazione> findByTipo(TipoPostazione tipo);
+
+    List<Postazione> findByTipoAndEdificio_Citta(TipoPostazione tipo, String citta);
 }
 
